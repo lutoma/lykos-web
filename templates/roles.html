@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% set active_page = "roles" %}
+
+{% block title %}Roles{% endblock %}
+
+{% block content %}
+	<h1>Roles</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Total games</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for role in roles %}
+				<tr>
+					<td><a href='/roles/{{ role['name'] }}/'>{{ role['name']|capitalize }}</a></td>
+					<td>{{ role['total_games'] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

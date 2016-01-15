@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% set active_page = "gamemodes" %}
+
+{% block title %}{{ name|capitalize }}{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<h1>{{ name|capitalize }}</h1>
+		<h3>This game mode has been played {{ total_games }} times</h3>
+	</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">Role stats</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Size</th>
+						<th>Total games</th>
+						<th>Village wins</th>
+						<th>Wolf wins</th>
+						<th>Monster wins</th>
+						<th>Fool wins</th>
+						<th>Piper wins</th>
+						<th>Succubus wins</th>
+						<th>Demoniac wins</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for stat in stats %}
+						<tr>
+							<td>{{ stat['size'] }}</td>
+							<td>{{ stat['totalgames'] }}</td>
+							<td>{{ stat['villagewins'] }} ({{ '%d' | format(stat['villagewins'] / stat['totalgames'] * 100) }}%)</td>
+							<td>{{ stat['wolfwins'] }} ({{ '%d' | format(stat['wolfwins'] / stat['totalgames'] * 100) }}%)</td>
+							<td>{{ stat['monsterwins'] }} ({{ '%d' | format(stat['monsterwins'] / stat['totalgames'] * 100) }}%)</td>
+							<td>{{ stat['foolwins'] }} ({{ '%d' | format(stat['foolwins'] / stat['totalgames'] * 100) }}%)</td>
+							<td>{{ stat['piperwins'] }} ({{ '%d' | format(stat['piperwins'] / stat['totalgames'] * 100) }}%)</td>
+							<td>{{ stat['succubuswins'] }} ({{ '%d' | format(stat['succubuswins'] / stat['totalgames'] * 100) }}%)</td>
+							<td>{{ stat['demoniacwins'] }} ({{ '%d' | format(stat['demoniacwins'] / stat['totalgames'] * 100) }}%)</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+{% endblock %}

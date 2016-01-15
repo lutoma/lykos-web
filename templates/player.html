@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set active_page = "players" %}
+
+{% block title %}{{ name }}{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<h1>{{ name }}</h1>
+		<h3>Total games: {{ total_games }}</h3>
+	</div>
+
+	<div class='panel panel-default'>
+		<div class="panel-heading">Trivia</div>
+
+		<div class="panel-body">
+			<ul>
+				{% if name in admins %}
+					<li>This player is an admin</li>
+				{% endif %}
+
+				{% if name == 'Vgr255' %}
+					<li>I blame Vgr</li>
+				{% endif %}
+
+				{% if total_games > average_games %}
+					<li>This player has played {{ '%d' | format((total_games - average_games) / average_games * 100) }}% more games than the average of {{ '%f' | format(average_games) }} games</li>
+				{% else %}
+					<li>This player has played {{ '%d' | format((total_games - average_games) / average_games * -100) }}% fewer games than the average of {{ '%f' | format(average_games) }} games</li>
+				{% endif %}
+
+				{% if is_simple %}
+					<li>This player uses simple role instructions</li>
+				{% endif %}
+
+				{% if pingif %}
+					<li>This player's pingif preference is set to {{ pingif }}</li>
+				{% endif %}
+
+				{% if best_role['name'] %}
+					<li>This player's best role is the {{ best_role['name'] }} – they have won {{ '%d' | format(best_role['percentage']) }}% of their games with it</li>
+				{% endif %}
+
+				{% if worst_role['name'] %}
+					<li>This player's worst role is the {{ worst_role['name'] }} – they won only {{ '%d' | format(worst_role['percentage']) }}% of their games playing it</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Role stats</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Role</th>
+					<th>Total games</th>
+					<th>Team wins</th>
+					<th>Individual wins</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for stat in stats %}
+					<tr>
+						<td><a href='/roles/{{ stat['role'] }}/'>{{ stat['role']|capitalize }}</a></td>
+						<td>{{ stat['totalgames'] }}</td>
+						<td>{{ stat['teamwins'] }} ({{ '%d' | format(stat['teamwins'] / stat['totalgames'] * 100) }}%)</td>
+						<td>{{ stat['individualwins'] }} ({{ '%d' | format(stat['individualwins'] / stat['totalgames'] * 100) }}%)</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

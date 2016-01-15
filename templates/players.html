@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set active_page = "players" %}
+
+{% block title %}Players{% endblock %}
+
+{% block content %}
+	<h1>Players</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Total games</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for player in players %}
+				<tr>
+					<td>
+						<a href='/players/{{ player['name'] }}/'>{{ player['name'] }}</a>
+					</td>
+					<td>{{ player['total_games'] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

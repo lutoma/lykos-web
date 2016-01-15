@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% set active_page = "gamemodes" %}
+
+{% block title %}Game modes{% endblock %}
+
+{% block content %}
+	<h1>Game modes</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Total games</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for mode in modes %}
+				<tr>
+					<td><a href='/gamemodes/{{ mode['name'] }}/'>{{ mode['name']|capitalize }}</a></td>
+					<td>{{ mode['total_games'] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

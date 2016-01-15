@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% set active_page = "roles" %}
+
+{% block title %}{{ name|capitalize }}{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<h1>{{ name|capitalize }}</h1>
+		<h3>This role has been in {{ total_games }} games</h3>
+	</div>
+
+	<div class='panel panel-default'>
+		<div class="panel-heading">Trivia</div>
+
+		<div class="panel-body">
+			<ul>
+				<li>This role has an average team win rate of {{ '%d' | format(team_wins / total_games * 100) }}%</li>
+				<li>This role has an average individual win rate of {{ '%d' | format(individual_wins / total_games * 100) }}%</li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}
