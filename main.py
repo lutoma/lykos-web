@@ -49,10 +49,9 @@ def player(name):
 	worst_role = {'name': None, 'percentage': 100}
 
 	for role in stats:
-		total_games = role['totalgames']
 		percentage = max(
-			role['individualwins'] / total_games * 100,
-			role['teamwins'] / total_games * 100
+			role['individualwins'] / role['totalgames'] * 100,
+			role['teamwins'] / role['totalgames'] * 100
 		)
 
 		if percentage > best_role['percentage']:
